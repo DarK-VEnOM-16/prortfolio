@@ -7,7 +7,7 @@ from datetime import timedelta
 from hitcount.models import HitCountMixin, HitCount
 from django.contrib.contenttypes.fields import GenericRelation
 
-categotry = {
+categotry = (
     ('Journal','Journal'),
     ('Book Chapters','Book Chapters'),
     ('Books','Books'),
@@ -15,18 +15,18 @@ categotry = {
     ('Conference','Conference'),
     
 
-}
+)
 
-categotry_reasearch = {
+categotry_reasearch = (
     ('Invited Talks','Invited Talks'),
     ('Editorial Boards','Editorial Boards'),
     ('Conference Presentation','Conference Presentation'),
-}
-categotry_team_member = {
+)
+categotry_team_member = (
     ('Team','Team'),
 ('Alumini','Alumini')
 
-}
+)
 
 class Team(models.Model):
     id = models.AutoField(primary_key=True)
@@ -68,7 +68,7 @@ class Contact_form(models.Model):
     def __str__(self):
         return self.name + " - " + self.email
 
-class Awards(models.Model):
+class Award(models.Model):
     image=models.FileField(null=True, blank=True)
     title=models.CharField(max_length=3000,null=True, blank=True)
     url=models.CharField(max_length=3000,null=True, blank=True)
@@ -80,6 +80,7 @@ class Media(models.Model):
     image=models.FileField(null=True, blank=True)
     title=models.CharField(max_length=3000,null=True, blank=True)
     description=models.CharField(max_length=3000,null=True, blank=True)
+    url=models.CharField(max_length=3000,null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -114,3 +115,22 @@ class Map_Location(models.Model):
 
     def __str__(self):
         return self.title+" : "+self.lat +" - "+self.lng
+
+
+class Gallery_Image(models.Model):
+    id = models.AutoField(primary_key=True)
+    photo = models.FileField(null=True, blank=True)
+    about =models.TextField(null=True,blank=True)
+    def __str__(self):
+        return str(self.about).capitalize()
+
+class Collaboration(models.Model):
+    id = models.AutoField(primary_key=True)
+    photo = models.FileField(null=True, blank=True)
+    name =models.TextField(null=True,blank=True)
+    
+    university =models.TextField(null=True,blank=True)
+    country =models.TextField(null=True,blank=True)
+    
+    def __str__(self):
+        return str(self.name).capitalize()
